@@ -1,0 +1,71 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Audio Files
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.m4a
+*.opus
+*.aac
+
+# Models and Data
+models/
+data/
+
+# Logs and Databases
+logs/
+*.log
+*.txt
+*.sqlite3
+db.sqlite3
+*.db
+*.db-journal
+
+# Temp, Cache and Backup
+temp/
+cache/
+backup/
+*.tmp
+*.swp
+*.bak
+*.cache
+.pytest_cache/
+.mypy_cache/
+
+# OS specific files
+.DS_Store
+Thumbs.db
