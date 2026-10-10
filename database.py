@@ -1,8 +1,9 @@
 import sqlite3
 from pathlib import Path
 from datetime import datetime
+from config import DATA_DIR
 
-DB_PATH = Path(__file__).parent / "data" / "assistant.db"
+DB_PATH = DATA_DIR / "assistant.db"
 
 
 def get_connection():

@@ -11,15 +11,17 @@ def show_pending_tasks():
     if not tasks:
         return "You don't have any pending tasks."
 
-    if len(tasks) == 1:
-        return f"You have one pending task: {tasks[0][1]}."
-
-    task_text = ", ".join(
-        f"task {task_id}: {title}"
-        for task_id, title in tasks
-    )
-
-    return f"You have {len(tasks)} pending tasks. {task_text}."
+    titles = [title for _, title in tasks]
+    
+    if len(titles) == 1:
+        return f"You have one pending task: {titles[0]}."
+    
+    if len(titles) == 2:
+        return f"You have two pending tasks: {titles[0]}, and {titles[1]}."
+        
+    last = titles.pop()
+    joined = ", then ".join(titles)
+    return f"You have {len(tasks)} pending tasks. The first is {titles[0]}, then {joined[len(titles[0])+7:]}, and finally {last}."
 
 
 def create_task(title):
@@ -30,7 +32,7 @@ def create_task(title):
 
     add_task(title)
 
-    return f"Added the task: {title}."
+    return f"Done. I've added the task to {title}."
 
 
 def finish_task(task_id):
@@ -41,4 +43,4 @@ def finish_task(task_id):
 
     complete_task(task_id)
 
-    return f"Marked task {task_id} as completed."
+    return f"Awesome. I've marked task {task_id} as complete."

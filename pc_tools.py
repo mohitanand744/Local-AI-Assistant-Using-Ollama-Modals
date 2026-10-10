@@ -2,31 +2,7 @@ import os
 import subprocess
 import webbrowser
 from pathlib import Path
-
-
-# ============================================================
-# ALLOWED APPS
-# ============================================================
-
-ALLOWED_APPS = {
-    "vscode": "code",
-    "visual studio code": "code",
-
-    "chrome": "chrome",
-    "google chrome": "chrome",
-
-    "notepad": "notepad",
-    "calculator": "calc",
-}
-
-
-# ============================================================
-# ALLOWED FOLDERS
-# ============================================================
-
-ALLOWED_FOLDERS = {
-    "ai assistant": r"C:\AI-Assistant",
-}
+from config import ALLOWED_APPS, ALLOWED_FOLDERS
 
 
 # ============================================================
@@ -47,10 +23,10 @@ def open_app(app_name):
             shell=True
         )
 
-        return f"Opened {app_name}."
+        return f"Sure, opening {app_name}."
 
     except Exception as error:
-        return f"I couldn't open {app_name}: {error}"
+        return f"I couldn't open {app_name}. {error}"
 
 
 # ============================================================
@@ -70,10 +46,10 @@ def open_folder(folder_name):
 
     try:
         os.startfile(folder_path)
-        return f"Opened {folder_name}."
+        return f"Got it, opening the {folder_name} folder."
 
     except Exception as error:
-        return f"I couldn't open {folder_name}: {error}"
+        return f"I couldn't open {folder_name}. {error}"
 
 
 # ============================================================
@@ -88,10 +64,10 @@ def open_website(url):
 
     try:
         webbrowser.open(url)
-        return f"Opened {url}."
+        return f"Sure, opening {url} in your browser."
 
     except Exception as error:
-        return f"I couldn't open the website: {error}"
+        return f"I couldn't open the website. {error}"
 
 
 # ============================================================

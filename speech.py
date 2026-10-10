@@ -21,14 +21,15 @@ for dll_dir in CUDA_DIRS:
             pass
 
 from faster_whisper import WhisperModel
+from config import WHISPER_MODEL, WHISPER_DEVICE, WHISPER_COMPUTE_TYPE
 
 
 print("Loading Whisper model...")
 
 model = WhisperModel(
-    "small",
-    device="cuda",
-    compute_type="float16"
+    WHISPER_MODEL,
+    device=WHISPER_DEVICE,
+    compute_type=WHISPER_COMPUTE_TYPE
 )
 
 print("Whisper model loaded.")

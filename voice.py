@@ -2,10 +2,16 @@ import re
 import subprocess
 from pathlib import Path
 import winsound
-
+import time
+from config import (
+    PIPER_MODEL,
+    PIPER_LENGTH_SCALE,
+    PIPER_NOISE_SCALE,
+    PIPER_NOISE_W
+)
 
 BASE_DIR = Path(__file__).parent
-MODEL = BASE_DIR / "models" / "en_US-lessac-medium.onnx"
+MODEL = PIPER_MODEL
 OUTPUT = BASE_DIR / "coding_beast_response.wav"
 
 
@@ -37,8 +43,14 @@ def clean_for_speech(text):
 
     # Remove excessive spaces
     text = re.sub(r"\s+", " ", text)
+    
+    text = text.strip()
+    
+    # Ensure text ends with punctuation so the TTS doesn't abruptly cut off the last word
+    if text and text[-1] not in ['.', '!', '?']:
+        text += '.'
 
-    return text.strip()
+    return text
 
 
 def speak(text):
@@ -47,8 +59,6 @@ def speak(text):
     if not clean_text:
         print("⚠️ Coding Beast returned an empty response. Nothing to speak.")
         return
-
-    print(f"Coding Beast: {clean_text}")
 
     subprocess.run(
         [
@@ -59,6 +69,12 @@ def speak(text):
             str(MODEL),
             "--output_file",
             str(OUTPUT),
+            "--length_scale",
+            str(PIPER_LENGTH_SCALE),
+            "--noise_scale",
+            str(PIPER_NOISE_SCALE),
+            "--noise_w",
+            str(PIPER_NOISE_W),
         ],
         input=clean_text,
         text=True,
@@ -69,6 +85,9 @@ def speak(text):
         str(OUTPUT),
         winsound.SND_FILENAME
     )
+    
+    # Wait 400ms after the AI finishes speaking to make the conversation feel more natural
+    time.sleep(0.4)
 
 
 if __name__ == "__main__":
